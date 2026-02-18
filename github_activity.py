@@ -41,8 +41,11 @@ def display_activity(events):
         
         # Format the output based on the specific type of GitHub event
         if event_type == 'PushEvent':
-            commits = len(event['payload']['commits'])
-            print(f"- Pushed {commits} commit(s) to {repo_name}")
+            # FIX: The 'commits' array was removed from the GitHub API payload.
+            # We now just report the push action and the ref (branch) if available.
+            ref = event['payload'].get('ref', '').replace('refs/heads/', '')
+            branch_info = f" to branch '{ref}'" if ref else ""
+            print(f"- Pushed code{branch_info} in {repo_name}")
             
         elif event_type == 'IssuesEvent':
             action = event['payload']['action']
@@ -61,7 +64,6 @@ def display_activity(events):
         else:
             # Fallback for events we haven't explicitly formatted
             print(f"- Triggered {event_type} in {repo_name}")
-
 def main():
     # Ensure the user provided exactly one argument (the script name + the username)
     if len(sys.argv) != 2:
