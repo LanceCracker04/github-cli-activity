@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # GitHub User Activity
 
 A small Python CLI script intended to fetch GitHub activity for a username and print a simple summary of recent actions.
