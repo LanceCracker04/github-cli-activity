@@ -47,6 +47,5 @@ The script prints a summary of recent GitHub activity, for example:
   `https://api.github.com/users/{username}/events/public`.
 
 Project Page URL: https://roadmap.sh/projects/github-user-activity
-=======
+
 # github-cli-activity
->>>>>>> f600fde83d767fdc83b7708e9aa60f95bc9757dc
