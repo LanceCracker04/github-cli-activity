@@ -7,6 +7,10 @@ def fetch_activity(username):
     """Fetches user activity from the GitHub API."""
     url = f"https://api.github.com/users/{username}/events"
     
+<<<<<<< HEAD
+=======
+    # GitHub requires a User-Agent header, otherwise it blocks the request
+>>>>>>> f600fde83d767fdc83b7708e9aa60f95bc9757dc
     req = urllib.request.Request(url, headers={'User-Agent': 'Python-CLI-App'})
 
     try:
@@ -33,11 +37,22 @@ def display_activity(events):
         print("No recent public activity found for this user.")
         return
 
+<<<<<<< HEAD
+=======
+    # Loop through the events (limiting to the 10 most recent for clean output)
+>>>>>>> f600fde83d767fdc83b7708e9aa60f95bc9757dc
     for event in events[:10]:
         repo_name = event['repo']['name']
         event_type = event['type']
         
+<<<<<<< HEAD
         if event_type == 'PushEvent':
+=======
+        # Format the output based on the specific type of GitHub event
+        if event_type == 'PushEvent':
+            # FIX: The 'commits' array was removed from the GitHub API payload.
+            # We now just report the push action and the ref (branch) if available.
+>>>>>>> f600fde83d767fdc83b7708e9aa60f95bc9757dc
             ref = event['payload'].get('ref', '').replace('refs/heads/', '')
             branch_info = f" to branch '{ref}'" if ref else ""
             print(f"- Pushed code{branch_info} in {repo_name}")
@@ -57,8 +72,15 @@ def display_activity(events):
              print(f"- Forked {repo_name}")
              
         else:
+<<<<<<< HEAD
             print(f"- Triggered {event_type} in {repo_name}")
 def main():
+=======
+            # Fallback for events we haven't explicitly formatted
+            print(f"- Triggered {event_type} in {repo_name}")
+def main():
+    # Ensure the user provided exactly one argument (the script name + the username)
+>>>>>>> f600fde83d767fdc83b7708e9aa60f95bc9757dc
     if len(sys.argv) != 2:
         print("Usage: python github_activity.py <username>")
         sys.exit(1)
